@@ -472,6 +472,8 @@
             },
             toggleMainButton(el) {
                 const mainButton = Telegram.WebApp.MainButton;
+                console.log("initDataUnsafe")
+                console.log(DemoApp.initDataUnsafe)
                 if (mainButton.isVisible) {
                     mainButton.hide();
                     el.innerHTML = 'Show Main Button';
