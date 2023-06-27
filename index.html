@@ -342,6 +342,7 @@
         <button id="data_btn" onclick="DemoApp.sendTime(true);">Send current time to bot (x10)</button>
         <button onclick="DemoApp.expand();">Expand Webview</button>
         <button onclick="DemoApp.toggleMainButton(this);">Hide Main Button</button>
+        <button onclick="DemoApp.balance();">Balance</button>
         <input type="text" placeholder="Input text in regular input..." id="regular_field" />
         <div class="input" contenteditable="true" data-placeholder="Input text in contenteditable field..."
             id="text_field"></div>
@@ -360,6 +361,16 @@
             </select></div>
     </section>
     <section>
+
+        <div id="btn_status" class="hint" style="display: none;">
+        </div>
+        <p>Balance</p>
+
+        <div class="hint">
+            <span id="webview_balance_result">Wainting balance...</span>
+        </div>
+
+
         <div id="btn_status" class="hint" style="display: none;">
         </div>
         <p>Test links:</p>
@@ -463,8 +474,6 @@
                 }).onClick(DemoApp.close);
             },
             expand() {
-                console.log("initDataUnsafe")
-                console.log(DemoApp.initDataUnsafe)
                 Telegram.WebApp.expand();
             },
             close() {
@@ -472,9 +481,6 @@
             },
             toggleMainButton(el) {
                 const mainButton = Telegram.WebApp.MainButton;
-                console.log("initDataUnsafe")
-                console.log(DemoApp.initDataUnsafe)
-                alert("test")
                 if (mainButton.isVisible) {
                     mainButton.hide();
                     el.innerHTML = 'Show Main Button';
@@ -483,11 +489,28 @@
                     el.innerHTML = 'Hide Main Button';
                 }
             },
+            balance() {
+                let xhr = new XMLHttpRequest();
+
+                xhr.open("POST", "https://webhook.site/629fb02e-273f-4581-af0a-d23c16446ea0", true);
+
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                let data = JSON.stringify({ 'name': 'test' });
+
+                // Create a state change callback
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById('webview_balance_result').innerHTML = JSON.stringify(xhr.responseText, null, 2);
+                    }
+                };
+
+                xhr.send(data);
+            },
 
             // actions
             sendMessage(msg_id, with_webview) {
                 if (!DemoApp.initDataUnsafe.query_id) {
-                    alert('test 123')
                     alert('WebViewQueryId not defined');
                     return;
                 }
@@ -567,13 +590,6 @@
             },
             checkInitData() {
                 const webViewStatus = document.querySelector('#webview_data_status');
-                console.log("initDataUnsafe")
-                console.log(DemoApp.initDataUnsafe)
-                console.log(DemoApp.initDataUnsafe.chat)
-                // console.log(DemoApp.initDataUnsafe.chat)
-                // console.log(DemoApp.initDataUnsafe.chat)
-                console.log(DemoApp.initDataUnsafe.query_id)
-                console.log(DemoApp.initDataUnsafe.receiver)
                 if (DemoApp.initDataUnsafe.query_id &&
                     DemoApp.initData &&
                     webViewStatus.classList.contains('status_need')
