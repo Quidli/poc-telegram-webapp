@@ -502,9 +502,9 @@
             xhr.setRequestHeader("Content-Type", "application/json");
 
             let data = JSON.stringify({
-                "userId": 5978188683,
+                "userId": Telegram.WebApp.initDataUnsafe.user.id,
                 "teamId": 12345,
-                "hash": DemoApp.initDataUnsafe.hash,
+                "hash": Telegram.WebApp.initDataUnsafe.hash,
             }, null, 2);
 
             // Create a state change callback
