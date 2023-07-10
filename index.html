@@ -501,10 +501,12 @@
             xhr.open("POST", "https://luis.loclx.io/api/callback/telegram/balance", true);
             xhr.setRequestHeader("Content-Type", "application/json");
 
+            console.log(DemoApp.initDataUnsafe);
+
             let data = JSON.stringify({
-                "userId": DemoApp.initDataUnsafe,
+                "userId": 111,
                 "teamId": 12345,
-                "hash": DemoApp.initDataUnsafe.hash,
+                "hash": 333,
             }, null, 2);
 
             // Create a state change callback
