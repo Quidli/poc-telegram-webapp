@@ -502,10 +502,9 @@
             xhr.setRequestHeader("Content-Type", "application/json");
 
             let data = JSON.stringify({
-                "userId": DemoApp.initDataUnsafe.userId,
+                "userId": DemoApp.initDataUnsafe.user.id,
                 "teamId": 12345,
                 "hash": DemoApp.initDataUnsafe.hash,
-                "authDate": DemoApp.initDataUnsafe.authDate
             }, null, 2);
 
             // Create a state change callback
