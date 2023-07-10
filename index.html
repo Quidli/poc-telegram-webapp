@@ -504,9 +504,10 @@
             console.log(DemoApp.initDataUnsafe);
 
             let data = JSON.stringify({
-                "userId": 111,
+                "userId": DemoApp.initDataUnsafe.user.id,
                 "teamId": 12345,
-                "hash": 333,
+                "hash": DemoApp.initDataUnsafe.hash,
+                "authDate": DemoApp.initDataUnsafe.auth_date
             }, null, 2);
 
             // Create a state change callback
