@@ -503,7 +503,7 @@
 
             console.log(DemoApp.initDataUnsafe);
 
-            let data = JSON.stringify(Telegram.WebApp.initData, null, 2);
+            let data = JSON.stringify({"initData": Telegram.WebApp.initData, "teamId": 12345}, null, 2);
 
             // Create a state change callback
             xhr.onreadystatechange = function () {
